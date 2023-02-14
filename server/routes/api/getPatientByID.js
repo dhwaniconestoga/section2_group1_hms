@@ -1,8 +1,8 @@
 
 module.exports = (req,res) => {
-    nurseID = req.params.id
+    patientID = req.params.id
     res.json({
-        message: 'Nurse fetched successfully',
+        message: 'Patient fetched successfully',
         nurse: {
             "test":"test"
         }

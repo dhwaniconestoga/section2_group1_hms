@@ -5,11 +5,11 @@ const bodyParser = require('body-parser');
 const mongoose = require("mongoose");
 require("dotenv").config();
 
-const getAllNurse = require("./routes/api/getAllNurse");
-const getNurseByID = require("./routes/api/getNurseByID");
-const createNurse = require("./routes/api/createNurse");
-const editNurseByID = require("./routes/api/editNurseByID");
-const deleteNurseByID = require("./routes/api/deleteNurseByID");
+const getAllPatients = require("./routes/api/getAllPatients");
+const getPatientByID = require("./routes/api/getPatientByID");
+const createPatient = require("./routes/api/createPatient");
+const editPatientByID = require("./routes/api/editPatientByID");
+const deletePatientByID = require("./routes/api/deletePatientByID");
 
 
 app.use(cors());
@@ -23,20 +23,20 @@ app.listen(process.env.PORT, () => {
     console.log("App listening on port " + process.env.PORT);
 })
 
-// API that get all nurses
-app.get('/nurses', getAllNurse);
+// API that get all patients
+app.get('/patients', getAllPatients);
 
-//API that gets a nurse by ID
-app.get('/nurses/:id', getNurseByID);
+//API that gets a patient by ID
+app.get('/patients/:id', getPatientByID);
 
-//API for adding a nurse
-app.post('/nurses', createNurse);
+//API for adding a patient
+app.post('/patients', createPatient);
 
-//API for editting a details of the nurse by ID 
-app.put('/nurses/:id', editNurseByID);
+//API for editting a details of the patient by ID 
+app.put('/patients/:id', editPatientByID);
 
-//API for deleting a  nurse by ID
-app.delete('/nurses/:id', deleteNurseByID);
+//API for deleting a  patient by ID
+app.delete('/patients/:id', deletePatientByID);
 
 
 app.get("/", (req, res) => {
