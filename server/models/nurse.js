@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const bcrypt = require("bcrypt");
 
-const PatientSchema = new Schema({
+const NurseSchema = new Schema({
   userId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User"
@@ -22,6 +22,6 @@ const PatientSchema = new Schema({
   }
 });
 
-const Patient = mongoose.model("Patient", PatientSchema);
+const Nurse = mongoose.model("Nurse", NurseSchema);
 
-module.exports = Patient;
+module.exports = Nurse;
