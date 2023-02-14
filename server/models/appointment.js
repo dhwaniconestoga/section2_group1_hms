@@ -12,6 +12,10 @@ const AppointmentSchema  = new Schema({
         type: Date , 
         required : [true,'Please provide appointment date']
     },
+	appointmentTime: {
+        type: Time , 
+        required : [true,'Please provide appointment time']
+    },
 	doctorNote: {
         type: String , 
         required : [true,'Please provide doctor note']
@@ -31,10 +35,6 @@ const AppointmentSchema  = new Schema({
 	doctorId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Doctor"
-    },
-	nurseId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Nurse"
     }
 },
 {
