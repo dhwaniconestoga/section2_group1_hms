@@ -3,6 +3,8 @@ const app = express();
 const cors = require('cors')
 const bodyParser = require('body-parser');
 const mongoose = require("mongoose");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 require("dotenv").config();
 
 const getAllPatients = require("./routes/api/getAllPatients");
@@ -39,11 +41,11 @@ app.put('/patients/:id', editPatientByID);
 //API for deleting a  patient by ID
 app.delete('/patients/:id', deletePatientByID);
 
-app.post('/signUp', signUp);
-
+app.post("/signup", async (req, res) => {
+      const { username, email, password, role } = req.body;
+});
 
 
 app.get("/", (req, res) => {
     res.send("hello world");
 });
-
