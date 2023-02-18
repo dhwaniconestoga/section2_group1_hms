@@ -8,8 +8,8 @@ export default function HomePage(){
         <Router>
             <div>
                 <header>
-                    <h1>Hospital Management System</h1>
-                    <Navbar/>
+                    {/* <h1>Hospital Management System</h1> */}
+                    {/* <Navbar/> */}
                 </header>
                 <PageRoutes />
             </div>

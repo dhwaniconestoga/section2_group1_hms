@@ -10,6 +10,7 @@ const getPatientByID = require("./routes/api/getPatientByID");
 const createPatient = require("./routes/api/createPatient");
 const editPatientByID = require("./routes/api/editPatientByID");
 const deletePatientByID = require("./routes/api/deletePatientByID");
+const signUp = require("./routes/api/signUp");
 
 
 app.use(cors());
@@ -37,6 +38,9 @@ app.put('/patients/:id', editPatientByID);
 
 //API for deleting a  patient by ID
 app.delete('/patients/:id', deletePatientByID);
+
+app.post('/signUp', signUp);
+
 
 
 app.get("/", (req, res) => {
