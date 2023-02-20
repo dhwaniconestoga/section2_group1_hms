@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import '../css/SignUp.css'
+import '../assets/css/signup.css';
 import { NavLink } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';
 import ErrorDialogueBox from '../components/ErrorDialogueBox';

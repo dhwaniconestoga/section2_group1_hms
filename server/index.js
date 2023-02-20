@@ -13,6 +13,7 @@ const createPatient = require("./routes/api/createPatient");
 const editPatientByID = require("./routes/api/editPatientByID");
 const deletePatientByID = require("./routes/api/deletePatientByID");
 const signUp = require("./routes/api/signUp");
+const UserRoute = require("./routes/UserRoute.js");
 
 
 app.use(cors());
@@ -21,6 +22,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 mongoose.set('strictQuery', true);
 mongoose.connect(process.env.MONGOCONNECTION, { useNewUrlParser: true });
+
+
+app.use(UserRoute);
 
 app.listen(process.env.PORT, () => {
     console.log("App listening on port " + process.env.PORT);
@@ -41,9 +45,14 @@ app.put('/patients/:id', editPatientByID);
 //API for deleting a  patient by ID
 app.delete('/patients/:id', deletePatientByID);
 
-app.post("/signup", async (req, res) => {
-      const { username, email, password, role } = req.body;
+app.post("/signup", signUp);
+
+app.post("/test", (req, res) => {
+    res.json({
+        message: 'success'
+    })
 });
+
 
 
 app.get("/", (req, res) => {

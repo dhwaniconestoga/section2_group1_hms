@@ -1,45 +1,129 @@
+const User = require("../../models/user");
+const Doctor = require("../../models/doctor");
+const Patient = require("../../models/patient");
+
+const isUserValid = (newUser) =>{
+    let errorList = [];
+    if(!newUser.firstName){
+        errorList[errorList.length] = "Please enter first name";
+    }
+    if(!newUser.lastName){
+        errorList[errorList.length] = "Please enter last name";
+    }
+    if(!newUser.email){
+        errorList[errorList.length] = "Please enter email";
+    }
+    if(!newUser.password){
+        errorList[errorList.length] = "Please enter password";
+    }
+    if(!newUser.confirmPassword){
+        errorList[errorList.length] = "Please re-enter password in Confirm Password field";
+    }
+    if(!newUser.userType){
+        errorList[errorList.length] = "Please enter User Type";
+    }
+    if(!(newUser.password == newUser.confirmPassword)){
+        errorList[errorList.length] = "Password and Confirm Password did not match";
+    }
+
+    if(errorList.length>0){
+        result = {
+            status:false,
+            errors: errorList
+        }
+        return result;
+    }
+    else {
+        return {status:true};
+    }
+    
+}
 
 module.exports =  (req,res) => {
-    const users = [];
+    let newUser = req.body;
+    
+    let userValidStatus =  isUserValid(newUser);
+    if(!userValidStatus.status){
+        res.json({
+            message: 'error',
+            errors: userValidStatus.errors
+        })
+    }
+    else{
+        //write code for adding user to db
+        User.create({
+            email: newUser.email,
+            password:  newUser.password,
+            user_type: newUser.userType
+        },(error,userDetails)=>{
+            if(error){
+                res.json({
+                    message: 'error',
+                    errors: [error.message]
+                })
+            }
+            else{
+                if(newUser.userType == "Doctor"){
+                    Doctor.create({
+                        userId: userDetails._id,
+                        first_name: newUser.firstName,
+                        last_name: newUser.lastName
+                    },(error2,doctorDetails)=>{
+                        if(error2){
+                            User.deleteOne({_id: userDetails});
+                            res.json({
+                                message: 'error',
+                                errors: [error.message]
+                            })
+                        }
+                        else{
+                            res.json({
+                                message: 'success'
+                            })
+                        }
+                    }) 
+                }
+                if(newUser.userType == "Patient"){
+                    Patient.create({
+                        userId: userDetails._id,
+                        first_name: newUser.firstName,
+                        last_name: newUser.lastName
+                    },(error2,patientDetails)=>{
+                        if(error2){
+                            User.deleteOne({_id: userDetails});
+                            res.json({
+                                message: 'error',
+                                errors: [error.message]
+                            })
+                        }
+                        else{
+                            res.json({
+                                message: 'success'
+                            })
+                        }
+                    }) 
+                }
+            }
+        })
+    }
 
-    app.post("/signup", async (req, res) => {
-      try {
-        const { username, email, password, role } = req.body;
-    
-        // Check if user already exists
-        const userExists = users.find(
-          (user) => user.email === email || user.username === username
-        );
-    
-        if (userExists) {
-          return res.status(409).json({ error: "User already exists" });
-        }
-    
-        // Hash password
-        const hashedPassword = await bcrypt.hash(password, 10);
-    
-        // Create user
-        const user = {
-          username,
-          email,
-          password: hashedPassword,
-          role,
-        };
-    
-        // Add user to list of users
-        users.push(user);
-    
-        // Create and sign JWT
-        const token = jwt.sign({ email, role }, "secret");
-    
-        return res.status(201).json({ message: "User created", token });
-      } catch (error) {
-        return res.status(500).json({ error: "Internal server error" });
-      }
-    });
-    
-    app.listen(PORT, () => {
-      console.log(`Server listening on port ${PORT}`);
-    });
+
+    // if(!true){
+    //     console.log(req.body)
+    //     res.json({
+    //         message: 'success',
+    //         request: req.body
+    //     })
+    // }
+    // else {
+    //     console.log("error signing up ")
+    //     res.json({
+    //         message: 'error',
+    //         errors: [
+    //             "error1",
+    //             "error2"
+    //         ]
+    //     })
+    // }
     
 }
