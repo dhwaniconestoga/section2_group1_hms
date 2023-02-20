@@ -15,7 +15,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 function ErrorDialogueBox(props) {
 
     let empRowList = props.ErrorList.map( err =>(
-        <p key={err}>err</p>
+        <p key={err}>{err}</p>
     ));
 
     return (
