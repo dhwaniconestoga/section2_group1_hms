@@ -4,7 +4,6 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './assets/css/bootstrap.min.css';
-//import 'bootstrap/dist/css/bootstrap.css';
 import './assets/css/font-awesome.min.css';
 import './assets/css/style.css';
 import './assets/js/bootstrap.min.js';

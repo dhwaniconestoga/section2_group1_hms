@@ -9,6 +9,11 @@ var uniqueValidator = require('mongoose-unique-validator')
 const UserSchema  = new Schema({ 
     email: {
         type: String , 
+        required : [true,'Please provide email'],
+        unique:true
+    },
+    username: {
+        type: String , 
         required : [true,'Please provide username'],
         unique:true
     },
@@ -16,7 +21,19 @@ const UserSchema  = new Schema({
         type: String , 
         required : [true,'Please provide password'],
     },
-    user_type: {
+    firstName: {
+        type: String , 
+        required : [true,'Please provide first name'],
+    },
+    lastName: {
+        type: String , 
+        required : [true,'Please provide last name'],
+    },
+    phone: {
+        type: String , 
+        required : [true,'Please provide phone number'],
+    },
+    userType: {
         type: String , 
         required : true,
         enum : ['Admin','Patient','Doctor','Nurse'],

@@ -53,8 +53,9 @@ module.exports =  (req,res) => {
         //write code for adding user to db
         User.create({
             email: newUser.email,
+            username: newUser.email,
             password:  newUser.password,
-            user_type: newUser.userType
+            userType: newUser.userType
         },(error,userDetails)=>{
             if(error){
                 res.json({
