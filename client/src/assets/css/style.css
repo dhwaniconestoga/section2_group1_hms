@@ -705,6 +705,7 @@ textarea.form-control {
 	margin: 0;
 }
 .user-menu {
+	float: right;
 	margin: 0;
 	position: relative;
 	z-index: 99;
@@ -4591,6 +4592,12 @@ blockquote p {
 	.left-action {
 		text-align: center;
 		margin-bottom: 15px;
+	}
+	.float-right {
+		float: right !important;
+	}
+	.float-left {
+		float: left !important;
 	}
 	.right-action {
 		text-align: center;

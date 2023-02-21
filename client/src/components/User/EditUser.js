@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from 'react';
-
-
 import Header from '../../components/Layout/Header';
 import Sidebar from '../../components/Layout/Sidebar';
 import { NavLink } from 'react-router-dom'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from "react-router-dom";
 import ErrorDialogueBox from '../../components/ErrorDialogueBox';
+import axios from "axios";
 
-
-
-function AddUser() {
+function EditUser() {
   const navigate = useNavigate();
 
   const [firstName, setFirstName] = useState('');
@@ -21,8 +18,8 @@ function AddUser() {
   const [phone, setPhone] = useState('');
   const [userType, setUserType] = useState('');
   const [passwordMatchDisplay, setPasswordMatchDisplay] = useState('none');
-  const [passwordValidationMessage, setPasswordValidationMessage] = useState('')
-
+  const [passwordValidationMessage, setPasswordValidationMessage] = useState('');
+  const { id } = useParams();
 
   const [errorDialogueBoxOpen, setErrorDialogueBoxOpen] = useState(false);
   const [errorList, setErrorList] = useState([]);
@@ -34,44 +31,44 @@ function AddUser() {
     setErrorDialogueBoxOpen(false)
   };
 
-
-  const addUser = (event) => {
-    event.preventDefault();
-    // TODO: Handle signup form submission'
-    const form = document.forms.addUserForm;
-    let user = {
-      firstName: form.firstName.value,
-      lastName: form.lastName.value,
-      username: form.username.value,
-      email: form.email.value,
-      phone: form.phone.value,
-      password: form.password.value,
-      confirmPassword: form.confirmPassword.value,
-      userType: form.userType.value
-    }
-
-
-    fetch('http://localhost:3001/users', {
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(user)
-    })
-      .then(response => response.json())
-      .then(data => {
-        console.log(data);
-        let respMessage = data.message;
-        if (respMessage === "success") {
-          navigate("/users");
-        }
-        else {
-          //Display error message
-          setErrorList(data.errors);
-          handleDialogueOpen();
-        }
-      });
+  useEffect(() => {
+    getUserById();
+  }, []);
+ 
+  const getUserById = async () => {
+    const response = await axios.get(`http://localhost:3001/users/${id}`);
+    setFirstName(response.data.firstName);
+    setLastName(response.data.lastName);
+    setEmail(response.data.email);
+    setUsername(response.data.username);
+    setPhone(response.data.phone);
+    setPassword(response.data.password);
+    setConfirmPassword(response.data.password);
+    setUserType(response.data.userType);
   };
+
+  const updateUser = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.patch(`http://localhost:3001/users/${id}`, {
+        firstName,
+        lastName,
+        username,
+        email,
+        phone,
+        password,
+        confirmPassword,
+        userType
+      });
+      navigate("/users");
+    } catch (error) {
+      console.log(error.response.data.errors);
+      //Display error message
+      setErrorList(error.response.data.errors);
+      handleDialogueOpen();
+    }
+  };
+
 
   useEffect(() => {
     if (password.length > 0 && password?.trim()?.length <= 6) {
@@ -98,13 +95,13 @@ function AddUser() {
             <div class="card-box">
               <div className="row">
                 <div className="col-lg-8 offset-lg-2">
-                  <h4 className="page-title">Add User</h4>
+                  <h3 className="page-title">Edit User</h3>
                 </div>
               </div>
               <div className="row">
 
                 <div className="col-lg-8 offset-lg-2">
-                <form id="addUserForm" name='addUserForm' onSubmit={addUser}>
+                <form id="addUserForm" name='addUserForm' onSubmit={updateUser}>
                     <div className="row">
                       <div className="col-sm-6">
                         <div className="form-group">
@@ -162,7 +159,7 @@ function AddUser() {
                     </div>
 
                     <div className="m-t-20 text-center">
-                      <button id="signUp" type="submit" className="btn btn-primary submit-btn">Create User</button>
+                      <button type="submit" className="btn btn-primary submit-btn">Update User</button>
                     </div>
                   </form>
                 </div>
@@ -172,7 +169,7 @@ function AddUser() {
           <ErrorDialogueBox
           open={errorDialogueBoxOpen}
           handleToClose={handleDialogueClose}
-          ErrorTitle="Error: Add User"
+          ErrorTitle="Error: Edit User"
           ErrorList = {errorList}
         />
       </div>
@@ -180,4 +177,4 @@ function AddUser() {
   )
 }
 
-export default AddUser;
+export default EditUser;

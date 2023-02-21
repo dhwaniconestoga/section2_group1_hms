@@ -1,15 +1,15 @@
 const Sidebar = () => {
     return (
-        <div class="sidebar" id="sidebar">
-            <div class="sidebar-inner slimscroll">
-                <div id="sidebar-menu" class="sidebar-menu">
+        <div className="sidebar" id="sidebar">
+            <div className="sidebar-inner slimscroll">
+                <div id="sidebar-menu" className="sidebar-menu">
                     <ul>
-                        <li class="menu-title">Main</li>
+                        <li className="menu-title">Main</li>
                         <li>
-                            <a href="#"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
+                            <a href="#"><i className="fa fa-dashboard"></i> <span>Dashboard</span></a>
                         </li>
-                        <li class="active">
-                            <a href="#"><i class="fa fa-user"></i> <span>User</span></a>
+                        <li className="active">
+                            <a href="#"><i className="fa fa-user"></i> <span>User</span></a>
                         </li>
                         
                     </ul>
