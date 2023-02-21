@@ -177,9 +177,9 @@ function SignupPage() {
               required
             >
               <option value=""></option>
-              <option value="patient">Patient</option>
-              <option value="doctor">Doctor</option>
-              <option value="nurse">Nurse</option>
+              <option value="Patient">Patient</option>
+              <option value="Doctor">Doctor</option>
+              <option value="Nurse">Nurse</option>
             </select>
             <label htmlFor="userType">User Type</label>
           </div>

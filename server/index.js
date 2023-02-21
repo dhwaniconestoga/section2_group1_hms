@@ -3,7 +3,6 @@ const app = express();
 const cors = require('cors')
 const bodyParser = require('body-parser');
 const mongoose = require("mongoose");
-const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 require("dotenv").config();
 
@@ -46,13 +45,6 @@ app.put('/patients/:id', editPatientByID);
 app.delete('/patients/:id', deletePatientByID);
 
 app.post("/signup", signUp);
-
-app.post("/test", (req, res) => {
-    res.json({
-        message: 'success'
-    })
-});
-
 
 
 app.get("/", (req, res) => {

@@ -7,7 +7,7 @@ const bcrypt = require('bcrypt')
 var uniqueValidator = require('mongoose-unique-validator')
 
 const UserSchema  = new Schema({ 
-    username: {
+    email: {
         type: String , 
         required : [true,'Please provide username'],
         unique:true
