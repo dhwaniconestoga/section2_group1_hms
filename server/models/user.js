@@ -30,8 +30,7 @@ const UserSchema  = new Schema({
         required : [true,'Please provide last name'],
     },
     phone: {
-        type: String , 
-        required : [true,'Please provide phone number'],
+        type: String 
     },
     userType: {
         type: String , 

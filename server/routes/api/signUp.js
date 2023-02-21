@@ -54,6 +54,8 @@ module.exports =  (req,res) => {
         User.create({
             email: newUser.email,
             username: newUser.email,
+            firstName: newUser.firstName,
+            lastName: newUser.lastName,
             password:  newUser.password,
             userType: newUser.userType
         },(error,userDetails)=>{
