@@ -13,7 +13,7 @@ const editPatientByID = require("./routes/api/editPatientByID");
 const deletePatientByID = require("./routes/api/deletePatientByID");
 const signUp = require("./routes/api/signUp");
 const UserRoute = require("./routes/UserRoute.js");
-const login = require("./routes/api/login");
+//const login = require("./routes/api/login");
 
 
 app.use(cors());
@@ -47,7 +47,7 @@ app.delete('/patients/:id', deletePatientByID);
 
 app.post("/signup", signUp);
 
-app.post("/login", login);
+//app.post("/login", login);
 
 app.get("/", (req, res) => {
     res.send("hello world");
