@@ -1,8 +1,8 @@
 import {Routes, Route} from 'react-router-dom';
 //import NurseDirectory from "./components/NurseDirectory";
-//import LoginPage from './pages/LoginPage';
 import LoginPage from './components/Login/Login'
-import SignupPage from './pages/SignupPage';
+//import SignupPage from './pages/SignupPage';
+import SignupPage from './components/SignUp/SignupPage';
 import AddUser from './components/User/AddUser';
 import UserList from "./components/User/UserList";
 import EditUser from "./components/User/EditUser";

@@ -44,7 +44,7 @@
 }
 
 #loginBtn {
-    padding: 10px ;
+    padding: 10px;
     color: white;
     background-color: #31b372;
     border: 0;
@@ -53,7 +53,7 @@
     border-radius: 2px;
 }
 
-#signUpBtn {
+.signUpBtn {
     padding: 10px;
     color: green;
     background-color: white;

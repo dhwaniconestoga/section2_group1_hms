@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Login.css';
+import styles from './Login.module.css';
 import { useNavigate } from "react-router-dom";
 
 
@@ -19,9 +19,9 @@ function Login() {
     }
 
     return (
-        <div id="loginBody">
-            <div className="greenLayer1">
-                <div id="loginFormDiv">
+        <div id={styles.loginBody}>
+            <div className={styles.greenLayer1}>
+                <div id={styles.loginFormDiv}>
                     <p>Welcome back! Please login to your account</p>
                     <form onSubmit={handleSubmit} className="col-6">
                         <div className='form-floating mt-3 col-12 mx-2'>
@@ -52,8 +52,8 @@ function Login() {
                             <label htmlFor="password">Password</label>
                         </div>
                         <div className='d-flex mx-2 mt-5 justify-content-between'>
-                            <button className='col-6' id="loginBtn" type="submit">Login</button>
-                            <button className='col-6' id="signUpBtn" onClick={signUpClicked} >Sign Up</button>
+                            <button className='col-6' id={styles.loginBtn} type="submit">Login</button>
+                            <button className={["col-6", styles.signUpBtn].join(" ")} onClick={signUpClicked} >Sign Up</button>
                         </div>
                     </form>
                 </div>
