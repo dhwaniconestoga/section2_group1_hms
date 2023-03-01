@@ -21,6 +21,14 @@ const UserSchema  = new Schema({
         type: String , 
         required : [true,'Please provide password'],
     },
+    activated:{
+        type: Boolean,
+        default: false
+    },
+    verificationToken:{
+        token: { type: String },
+        expires: { type: Date }
+    },
     firstName: {
         type: String , 
         required : [true,'Please provide first name'],

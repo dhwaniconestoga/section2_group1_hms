@@ -13,6 +13,7 @@ const editPatientByID = require("./routes/api/editPatientByID");
 const deletePatientByID = require("./routes/api/deletePatientByID");
 const signUp = require("./routes/api/signUp");
 const UserRoute = require("./routes/UserRoute.js");
+const verifyUser = require("./routes/api/verifyUser");
 //const login = require("./routes/api/login");
 
 
@@ -46,6 +47,8 @@ app.put('/patients/:id', editPatientByID);
 app.delete('/patients/:id', deletePatientByID);
 
 app.post("/signup", signUp);
+
+app.get("/verify/:id",verifyUser);
 
 //app.post("/login", login);
 

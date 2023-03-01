@@ -2,6 +2,9 @@ const User = require("../../models/user");
 const Doctor = require("../../models/doctor");
 const Patient = require("../../models/patient");
 
+const crypto = require('crypto');
+const nodemailer = require('nodemailer');
+
 const isUserValid = (newUser) => {
     const errorList = [];
     const nameRegex = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/;  
@@ -27,11 +30,12 @@ const isUserValid = (newUser) => {
 
     if (!newUser.password) {
         errorList.push("Please enter password");
-    } else if (!passwordRegex.test(newUser.password)) {
-        errorList.push(
-            "Password should be at least 8 characters long and contain at least one letter and one number"
-        );
-    }
+    } 
+    // else if (!passwordRegex.test(newUser.password)) {
+    //     errorList.push(
+    //         "Password should be at least 8 characters long and contain at least one letter and one number"
+    //     );
+    // }
 
     if (!newUser.confirmPassword) {
         errorList.push("Please re-enter password in Confirm Password field");
@@ -51,6 +55,43 @@ const isUserValid = (newUser) => {
         return { status: true };
     }
 };
+
+const saveVerificationToken = async (userId,verificationToken) =>{
+    await User.findOneAndUpdate({ _id: userId },{ "verificationToken" : verificationToken});
+    return;
+} 
+
+const generateVerificationToken = () => {
+    const token = crypto.randomBytes(64).toString('hex');
+    const expires = Date.now() + 3 * 60 * 60 * 1000; // 3 hours from now
+    let verificationToken = {
+        "token":token,
+        "expires":expires
+    };
+    return verificationToken;
+};
+
+// Send an email with a verification link
+const sendVerificationEmail = async (email, token) => {
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: 'hms.management.admn@gmail.com',
+        pass: 'ktjwfmcjsfxdfzky'
+      }
+    });
+  
+    const mailOptions = {
+      from: 'hms.management.admn@gmail.com',
+      to: email,
+      subject: 'Verify your email address',
+      text: `Please click the following link to verify your email address: http://localhost:3001/verify/${token}`,
+      html: `<p>Please click this link to verify your account:</p> <a href="http://localhost:3001/verify/${token}">Verify</a>`,
+    };
+  
+    let resp = await transporter.sendMail(mailOptions);
+    return resp;
+  };
 
 module.exports = (req, res) => {
     const newUser = req.body;
@@ -72,6 +113,9 @@ module.exports = (req, res) => {
                 if (error) {
                     res.json({ message: "error", errors: [error.message] });
                 } else {
+                    let verificationToken = generateVerificationToken()
+                    saveVerificationToken(userDetails._id,verificationToken);
+                    let resp = sendVerificationEmail(userDetails.email,verificationToken.token);
                     if (newUser.userType === "Doctor") {
                         Doctor.create(
                             {
