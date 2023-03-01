@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import '../assets/css/signup.css';
 import { NavLink } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';
-import ErrorDialogueBox from '../components/ErrorDialogueBox';
+import ErrorDialogueBox from '../components/MUIDialogueBox/ErrorDialogueBox';
 
 
 

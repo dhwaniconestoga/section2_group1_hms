@@ -3,7 +3,7 @@ import Header from '../Layout/Header';
 import Sidebar from '../Layout/Sidebar';
 import { Link } from "react-router-dom";
 import axios from "axios";
-import ErrorDialogueBox from '../ErrorDialogueBox';
+import ErrorDialogueBox from '../MUIDialogueBox/ErrorDialogueBox';
 
 
 function UserList() {

@@ -3,7 +3,7 @@ import Header from '../../components/Layout/Header';
 import Sidebar from '../../components/Layout/Sidebar';
 import { NavLink } from 'react-router-dom'
 import { useNavigate, useParams } from "react-router-dom";
-import ErrorDialogueBox from '../../components/ErrorDialogueBox';
+import ErrorDialogueBox from '../MUIDialogueBox/ErrorDialogueBox';
 import axios from "axios";
 
 function EditUser() {
