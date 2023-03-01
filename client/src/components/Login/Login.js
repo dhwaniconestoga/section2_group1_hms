@@ -9,10 +9,44 @@ function Login() {
 
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
+    const [errorDialogueBoxOpen,setErrorDialogueBoxOpen] = useState(false);
+    const [errorList,setErrorList] = useState([]);
+
+    const handleDialogueOpen = () => {
+        setErrorDialogueBoxOpen(true)
+      };
+    const handleDialogueClose = () => {
+        setErrorList([]);
+        setErrorDialogueBoxOpen(false)
+    };
 
     const handleSubmit = (event) => {
         event.preventDefault();
         // TODO: Handle login form submission
+        const form = document.forms.loginForm;
+        let user = {
+            email: form.email.value,
+            password: form.password.value
+        }
+        fetch('http://localhost:3001/login',{
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(user) 
+        })
+                .then(response => response.json())
+                .then(data => {
+                    let respMessage = data.message;
+                    if(respMessage==="success"){
+                        navigate("/hello");
+                    }
+                    else{
+                    //TODO: display error message
+                        setErrorList(data.errors);
+                        handleDialogueOpen();
+                    }
+                });
     };
 
     const signUpClicked = () => {
@@ -24,7 +58,7 @@ function Login() {
             <div className={styles.greenLayer1}>
                 <div id={styles.loginFormDiv}>
                     <p>Welcome back! Please login to your account</p>
-                    <form onSubmit={handleSubmit} className="col-6">
+                    <form onSubmit={handleSubmit} className="col-6" name="loginForm" id="loginForm">
                         <div className='form-floating mt-3 col-12 mx-2'>
                             <input
                             type="email"
@@ -59,6 +93,12 @@ function Login() {
                     </form>
                 </div>
             </div>
+            <ErrorDialogueBox
+                open={errorDialogueBoxOpen}
+                handleToClose={handleDialogueClose}
+                ErrorTitle="Login Error"
+                ErrorList = {errorList}
+            />
         </div>
     );
 }

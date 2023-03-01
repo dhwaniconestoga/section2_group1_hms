@@ -14,7 +14,7 @@ const deletePatientByID = require("./routes/api/deletePatientByID");
 const signUp = require("./routes/api/signUp");
 const UserRoute = require("./routes/UserRoute.js");
 const verifyUser = require("./routes/api/verifyUser");
-//const login = require("./routes/api/login");
+const login = require("./routes/api/login");
 
 
 app.use(cors());
@@ -50,7 +50,7 @@ app.post("/signup", signUp);
 
 app.get("/verify/:id",verifyUser);
 
-//app.post("/login", login);
+app.post("/login", login);
 
 app.get("/", (req, res) => {
     res.send("hello world");

@@ -15,11 +15,11 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 function ErrorDialogueBox(props) {
 
     let empRowList = props.ErrorList.map( err =>(
-        <p key={err}>{err}</p>
+        <p className="text-center" key={err}>{err}</p>
     ));
 
     return (
-        <Dialog open={props.open} onClose={props.handleToClose} TransitionComponent={Transition} keepMounted >
+        <Dialog open={props.open} onClose={props.handleToClose} TransitionComponent={Transition} keepMounted PaperProps={{ sx: { minWidth: "20%" } }} >
             <DialogTitle>{props.ErrorTitle}</DialogTitle>
             <DialogContent>
                 <DialogContentText>
