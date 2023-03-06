@@ -55,3 +55,15 @@ input[type=checkbox]{
     transform: scale(1.1)
 }
 
+@media screen and (max-width:1000px) {
+    #signUpBody{
+        
+        grid-template-columns: 0% 100%;
+    } 
+
+    #signUpBtn {
+        padding: 10px 50px;
+       
+    }
+}
+

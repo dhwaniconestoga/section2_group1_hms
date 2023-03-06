@@ -86,9 +86,9 @@ function Login() {
                             />
                             <label htmlFor="password">Password</label>
                         </div>
-                        <div className='d-flex mx-2 mt-5 justify-content-between'>
-                            <button className='col-6' id={styles.loginBtn} type="submit">Login</button>
-                            <button className={["col-6", styles.signUpBtn].join(" ")} onClick={signUpClicked} >Sign Up</button>
+                        <div className='d-flex flex-column flex-md-row  mx-2 mt-5 justify-content-between'>
+                            <button className='col-12 col-md-6' id={styles.loginBtn} type="submit">Login</button>
+                            <button className={["col-12 col-md-6 mt-3 mt-md-0", styles.signUpBtn].join(" ")} onClick={signUpClicked} >Sign Up</button>
                         </div>
                     </form>
                 </div>

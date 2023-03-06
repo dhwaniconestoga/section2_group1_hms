@@ -92,8 +92,8 @@ function SignupPage() {
       <div>
         <h2>Create An Account</h2>
         <form id={styles.signUpform} name='signUpform' onSubmit={handleSubmit}>
-          <div className='d-flex flex-row mt-5'>
-            <div className='col-6 form-floating mx-2 '>
+          <div className='d-flex flex-column flex-lg-row flex-sm-column mt-5'>
+            <div className='col-12 col-sm-12 col-lg-6  form-floating mx-2 '>
               <input
                 type="text"
                 id="firstName"
@@ -106,7 +106,7 @@ function SignupPage() {
               />
               <label htmlFor="firstName">First Name</label>
             </div>
-            <div className='col-6 form-floating mx-2'>
+            <div className='col-12  col-sm-12 col-lg-6  mt-3 mt-sm-3 mt-lg-0 form-floating mx-2'>
               <input
                 type="text"
                 id="lastName"
