@@ -1,4 +1,4 @@
-import * as React from 'react';
+// import * as React from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import MuiDrawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
@@ -21,7 +21,8 @@ import Collapse from '@mui/material/Collapse';
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 import TableChartIcon from '@mui/icons-material/TableChart';
 import { NavLink,Link,useLocation } from 'react-router-dom'
-
+import React, { useContext } from 'react';
+import {UserContext} from '../../../Context/UserContext'
 
 import styles from './Sidebar.module.css'
 
@@ -85,6 +86,8 @@ export default function Sidebar({ open, handleDrawerClose, handleDrawerOpen }) {
     
     let selectedItem = useLocation().pathname.split('/')[1]
     console.log(selectedItem);
+
+    const {isLoggedIn,currentUser,signOutUser} = useContext(UserContext);
     
     const [openUserCollapse, setOpenUseCollapse] = React.useState(false);
 
@@ -266,7 +269,7 @@ export default function Sidebar({ open, handleDrawerClose, handleDrawerOpen }) {
             </List>
             <Divider />
             <List>
-                <ListItem key={"Logout"} disablePadding sx={{ display: 'block' }}>
+                <ListItem key={"Logout"} disablePadding sx={{ display: 'block' }} onClick={signOutUser}>
                     <ListItemButton
                         sx={{
                             minHeight: 48,

@@ -1,6 +1,8 @@
 const jwt = require("jsonwebtoken");
 const User = require("../../models/user");
 const bcrypt = require("bcrypt");
+require("dotenv").config();
+
 
 const isLoginValid = (email, password) => {
     const errorList = [];
@@ -48,8 +50,14 @@ const loginUser = (req, res) => {
                     } else if (!result) {
                         res.status(401).json({ message: "error", errors: ["Invalid password"] });
                     } else {
-                        const token = jwt.sign({ id: user._id }, "your_secret_key_here", { expiresIn: "365d" });
-                        res.json({ message: "success", token: token });
+                        const currentUser = {
+                            "firstName": user.firstName,
+                            "lastName": user.lastName,
+                            "userType":user.userType
+                        };
+        
+                        const token = jwt.sign({ id: user._id, userType: user.userType }, process.env.SECRET_KEY, { expiresIn: "365d" });
+                        res.json({ message: "success", user: currentUser, token: token });
                     }
                 });
             }

@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import styles from './Login.module.css';
 import { useNavigate } from "react-router-dom";
 import ErrorDialogueBox from '../MUIDialogueBox/ErrorDialogueBox';
+import {UserContext} from '../../Context/UserContext'
 
 
 function Login() {
@@ -11,6 +12,8 @@ function Login() {
     const [email, setEmail] = useState('');
     const [errorDialogueBoxOpen,setErrorDialogueBoxOpen] = useState(false);
     const [errorList,setErrorList] = useState([]);
+
+    const {signInUser} = useContext(UserContext);
 
     const handleDialogueOpen = () => {
         setErrorDialogueBoxOpen(true)
@@ -38,8 +41,10 @@ function Login() {
                 .then(response => response.json())
                 .then(data => {
                     let respMessage = data.message;
+                    let user = data.user;
                     if(respMessage==="success"){
-                        navigate("/hello");
+                        signInUser(user,data.token);
+                        navigate("/");
                     }
                     else{
                     //TODO: display error message
