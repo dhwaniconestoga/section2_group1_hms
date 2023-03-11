@@ -1,10 +1,11 @@
+const jwt = require("jsonwebtoken");
 const User = require("../../models/user");
 const bcrypt = require("bcrypt");
 
 const isLoginValid = (email, password) => {
     const errorList = [];
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const passwordRegex = /^(?=.[A-Za-z])(?=.\d)[A-Za-z\d]{8,}$/;
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 
     if (!email) {
         errorList.push("Please enter email");
@@ -47,7 +48,8 @@ const loginUser = (req, res) => {
                     } else if (!result) {
                         res.status(401).json({ message: "error", errors: ["Invalid password"] });
                     } else {
-                        res.json({ message: "success" });
+                        const token = jwt.sign({ id: user._id }, "your_secret_key_here", { expiresIn: "365d" });
+                        res.json({ message: "success", token: token });
                     }
                 });
             }
@@ -56,3 +58,4 @@ const loginUser = (req, res) => {
 };
 
 module.exports = loginUser;
+
