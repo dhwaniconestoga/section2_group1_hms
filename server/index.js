@@ -25,11 +25,13 @@ mongoose.set('strictQuery', true);
 mongoose.connect(process.env.MONGOCONNECTION, { useNewUrlParser: true });
 
 
-app.use(UserRoute);
+
 
 app.listen(process.env.PORT, () => {
     console.log("App listening on port " + process.env.PORT);
 })
+
+app.use(UserRoute);
 
 // API that get all patients
 app.get('/patients', getAllPatients);

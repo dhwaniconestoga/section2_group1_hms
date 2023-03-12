@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const adminAuth = require('./middlewares/adminAuth');
 
 const  { 
     getUsers, 
@@ -11,10 +12,10 @@ const  {
  
 
  
-router.get('/users', getUsers);
-router.get('/users/:id', getUserById);
-router.post('/users', saveUser);
-router.patch('/users/:id', updateUser);
-router.delete('/users/:id', deleteUser);
+router.get('/users', adminAuth,getUsers);
+router.get('/users/:id',adminAuth, getUserById);
+router.post('/users',adminAuth, saveUser);
+router.patch('/users/:id', adminAuth,updateUser);
+router.delete('/users/:id',adminAuth, deleteUser);
  
 module.exports = router

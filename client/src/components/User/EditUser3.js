@@ -38,7 +38,11 @@ function EditUser() {
   }, []);
  
   const getUserById = async () => {
-    const response = await axios.get(`http://localhost:3001/users/${id}`);
+    const response = await axios.get(`http://localhost:3001/users/${id}`,{
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("token")}`
+      }
+    },);
     setFirstName(response.data.firstName);
     setLastName(response.data.lastName);
     setEmail(response.data.email);
@@ -52,7 +56,8 @@ function EditUser() {
   const updateUser = async (e) => {
     e.preventDefault();
     try {
-      await axios.patch(`http://localhost:3001/users/${id}`, {
+      await axios.patch(`http://localhost:3001/users/${id}`,
+      {
         firstName,
         lastName,
         username,
@@ -61,10 +66,15 @@ function EditUser() {
         password,
         confirmPassword,
         userType
+      },
+      {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("token")}`
+        }
       });
       navigate("/users");
     } catch (error) {
-      console.log(error.response.data.errors);
+      console.log(error);
       //Display error message
       setErrorList(error.response.data.errors);
       handleDialogueOpen();

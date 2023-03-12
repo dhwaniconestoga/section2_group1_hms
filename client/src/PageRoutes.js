@@ -1,8 +1,6 @@
 import {Routes, Route} from 'react-router-dom';
 import React, { useContext } from 'react';
 
-//import NurseDirectory from "./components/NurseDirectory";
-
 import LoginPage from './components/Login/Login'
 
 //import SignupPage from './pages/SignupPage';
@@ -33,6 +31,13 @@ import DoctorDashboard from './components/dashboard/DoctorDashboard';
 
 const NotFound = () => <h2 style={{margin:'70px'}}>This Path is not available</h2>
 
+function ProtectedAdminRoute({children}) {
+    const {currentUser} = useContext(UserContext);
+    if (currentUser.userType == "Admin") {
+        return children ;
+    }
+}
+
 export default function PageRoutes(){
     const {currentUser} = useContext(UserContext);
     return (
@@ -47,7 +52,7 @@ export default function PageRoutes(){
                         <PatientDashboard />:
                     <AdminDashboard />} 
                 />
-                <Route path='users' element= {<User />} >
+                <Route path='users' element= { <ProtectedAdminRoute>  <User /> </ProtectedAdminRoute>} >
                     <Route index element= {<UserList />} />
                     <Route path='add' element={<AddUser />} />
                     <Route path="edit/:id" element={<EditUser />} />

@@ -58,7 +58,8 @@ function AddUser() {
     fetch('http://localhost:3001/users', {
       method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${localStorage.getItem("token")}`
       },
       body: JSON.stringify(user)
     })

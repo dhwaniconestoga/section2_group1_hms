@@ -35,7 +35,11 @@ function UserList() {
     );
 
     const getUsers = async () => {
-        const response = await axios.get("http://localhost:3001/users",{params: {
+        const response = await axios.get("http://localhost:3001/users",{
+            headers: {
+                authorization: `Bearer ${localStorage.getItem("token")}`
+            },
+            params: {
             role: role
           }
         });
@@ -46,7 +50,11 @@ function UserList() {
         var x = window.confirm("Are you sure you want to delete this user?");
         if (x)
             try {
-                await axios.delete(`http://localhost:3001/users/${id}`);
+                await axios.delete(`http://localhost:3001/users/${id}`,{
+                    headers: {
+                        authorization: `Bearer ${localStorage.getItem("token")}`
+                    }
+                });
                 getUsers();
             } catch (error) {
                 setErrorList(error);
