@@ -13,6 +13,7 @@ const editPatientByID = require("./routes/api/editPatientByID");
 const deletePatientByID = require("./routes/api/deletePatientByID");
 const signUp = require("./routes/api/signUp");
 const UserRoute = require("./routes/UserRoute.js");
+const DashboardRoute = require("./routes/DashboardRoute.js");
 const verifyUser = require("./routes/api/verifyUser");
 const login = require("./routes/api/login");
 
@@ -31,6 +32,7 @@ app.listen(process.env.PORT, () => {
     console.log("App listening on port " + process.env.PORT);
 })
 
+app.use(DashboardRoute);
 app.use(UserRoute);
 
 // API that get all patients
