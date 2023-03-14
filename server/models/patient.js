@@ -8,10 +8,10 @@ const PatientSchema = new Schema({
       type: mongoose.Schema.Types.ObjectId,
       ref: "User"
   },
-  first_name: {
+  firstName: {
     type: String
   },
-  last_name: {
+  lastName: {
     type: String
   },
   mobile: {

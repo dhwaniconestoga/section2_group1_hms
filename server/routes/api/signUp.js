@@ -120,8 +120,8 @@ module.exports = (req, res) => {
                         Doctor.create(
                             {
                                 userId: userDetails._id,
-                                first_name: newUser.firstName,
-                                last_name: newUser.lastName,
+                                firstName: newUser.firstName,
+                                lastName: newUser.lastName,
                             },
                             (error2, doctorDetails) => {
                                 if (error2) {
@@ -137,8 +137,8 @@ module.exports = (req, res) => {
                         Patient.create(
                             {
                                 userId: userDetails._id,
-                                first_name: newUser.firstName,
-                                last_name: newUser.lastName,
+                                firstName: newUser.firstName,
+                                lastName: newUser.lastName,
                             },
                             (error2, patientDetails) => {
                                 if (error2) {

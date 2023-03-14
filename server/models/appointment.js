@@ -16,18 +16,6 @@ const AppointmentSchema  = new Schema({
         type: Time , 
         required : [true,'Please provide appointment time']
     },
-	doctorNote: {
-        type: String , 
-        required : [true,'Please provide doctor note']
-    },
-	totalCost: {
-        type: String , 
-        required : [true,'Please provide total cost']
-    },
-	medicineCost: {
-        type: Number, 
-        required : [true,'Please provide medicine cost'] 
-    },
 	patientId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Patient"

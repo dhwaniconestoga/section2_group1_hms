@@ -11,28 +11,18 @@ const MedicineSchema  = new Schema({
         type: String , 
         required : [true,'Please provide company']
     },
+    name: {
+        type: String , 
+        required : [true,'Please provide name']
+    },
 	description: {
         type: String , 
         required : [true,'Please provide description']
     },
-	medicineDose: {
-        type: String , 
-        required : [true,'Please provide medicine dose']
-    },
-	medicineType: {
-        type: String, 
-        required : [true,'Please provide medicine type'] 
-    },
-	medicineCost: {
+	price: {
         type: Number, 
         required : [true,'Please provide medicine cost'] 
-    },
-	appointments: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Appointment"
-      }
-    ]
+    }
 },
 {
   timestamps: true

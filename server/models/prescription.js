@@ -15,9 +15,20 @@ const PrescriptionSchema  = new Schema({
 	  type: mongoose.Schema.Types.ObjectId,
 	  ref: "User"
 	},
-    qty: {
+	doctorId: {
+	  type: mongoose.Schema.Types.ObjectId,
+	  ref: "Doctor"
+	},
+	patientId: {
+	  type: mongoose.Schema.Types.ObjectId,
+	  ref: "Patient"
+	},
+    dosage: {
         type: Number
-    }
+    },
+	remarks: {
+	  type: String
+	}
 },
 {
   timestamps: true
