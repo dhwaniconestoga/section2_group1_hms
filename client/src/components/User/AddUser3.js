@@ -20,7 +20,6 @@ function AddUser() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [phone, setPhone] = useState('');
   const [userType, setUserType] = useState('');
   const [passwordMatchDisplay, setPasswordMatchDisplay] = useState('none');
   const [passwordValidationMessage, setPasswordValidationMessage] = useState('')
@@ -46,7 +45,6 @@ function AddUser() {
       lastName: form.lastName.value,
       username: form.username.value,
       email: form.email.value,
-      phone: form.phone.value,
       password: form.password.value,
       confirmPassword: form.confirmPassword.value,
       userType: form.userType.value
@@ -141,12 +139,6 @@ function AddUser() {
                           <div className="form-group">
                             <label>Confirm Password</label>
                             <input name="confirmPassword" className="form-control" type="password" required value={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)} />
-                          </div>
-                        </div>
-                        <div className="col-sm-6">
-                          <div className="form-group">
-                            <label>Phone </label>
-                            <input name="phone" className="form-control" type="text" value={phone} onChange={(event) => setPhone(event.target.value)} />
                           </div>
                         </div>
                         <div className="col-sm-6">

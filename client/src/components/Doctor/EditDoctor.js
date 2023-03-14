@@ -159,7 +159,7 @@ function Editdoctor() {
                         <div className="form-group">
                           <label>Role</label>
                           <select name="userType" className="form-select" defaultValue={userType} onChange={(event) => setUserType(event.target.value)}>
-                            <option value="doctor">doctor</option>
+                            <option value="Doctor">doctor</option>
                           </select>
                         </div>
                       </div>

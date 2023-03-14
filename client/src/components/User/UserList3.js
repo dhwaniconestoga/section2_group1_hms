@@ -116,7 +116,6 @@ function UserList() {
                                         <tr>
                                             <th>Sr. No</th>
                                             <th>Name</th>
-                                            <th>Phone</th>
                                             <th>Email</th>
                                             <th>Role</th>
                                             <th className="text-right">Action</th>
@@ -127,7 +126,6 @@ function UserList() {
                                             <tr key={user._id}>
                                                 <td>{index + 1}</td>
                                                 <td>{user.firstName} {user.lastName}</td>
-                                                <td>{user.phone}</td>
                                                 <td>{user.email}</td>
                                                 <td><span className="custom-badge status-green">{user.userType}</span></td>
                                                 <td>

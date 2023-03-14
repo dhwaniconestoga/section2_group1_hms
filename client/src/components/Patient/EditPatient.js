@@ -136,13 +136,13 @@ function EditPatient() {
                       <div className="col-sm-6">
                         <div className="form-group">
                           <label>Password</label>
-                          <input name="password" className="form-control" type="password" required value={password} onChange={(event) => setPassword(event.target.value)} />
+                          <input name="password" className="form-control" type="password" value={password} onChange={(event) => setPassword(event.target.value)} />
                         </div>
                       </div>
                       <div className="col-sm-6">
                         <div className="form-group">
                           <label>Confirm Password</label>
-                          <input name="confirmPassword" className="form-control" type="password" required value={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)} />
+                          <input name="confirmPassword" className="form-control" type="password" value={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)} />
                         </div>
                       </div>
                       <div className="col-sm-6">

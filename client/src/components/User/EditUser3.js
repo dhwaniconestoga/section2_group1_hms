@@ -17,7 +17,6 @@ function EditUser() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [phone, setPhone] = useState('');
   const [userType, setUserType] = useState('');
   const [passwordMatchDisplay, setPasswordMatchDisplay] = useState('none');
   const [passwordValidationMessage, setPasswordValidationMessage] = useState('');
@@ -47,7 +46,6 @@ function EditUser() {
     setLastName(response.data.lastName);
     setEmail(response.data.email);
     setUsername(response.data.username);
-    setPhone(response.data.phone);
     setPassword(response.data.password);
     setConfirmPassword(response.data.password);
     setUserType(response.data.userType);
@@ -62,7 +60,6 @@ function EditUser() {
         lastName,
         username,
         email,
-        phone,
         password,
         confirmPassword,
         userType
@@ -149,12 +146,7 @@ function EditUser() {
                             <input name="confirmPassword" className="form-control" type="password" required value={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)} />
                           </div>
                         </div>
-                        <div className="col-sm-6">
-                          <div className="form-group">
-                            <label>Phone </label>
-                            <input name="phone" className="form-control" type="text" value={phone} onChange={(event) => setPhone(event.target.value)} />
-                          </div>
-                        </div>
+                       
                         <div className="col-sm-6">
                           <div className="form-group">
                             <label>Role</label>
