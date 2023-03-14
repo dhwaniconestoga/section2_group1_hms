@@ -38,7 +38,7 @@ function PatientList() {
     };
 
     const deletePatient = async (id) => {
-        var x = confirm("Are you sure you want to delete this patient?");
+        var x = window.confirm("Are you sure you want to delete this patient?");
         if (x)
             try {
                 await axios.delete(`http://localhost:3001/patients/${id}`);

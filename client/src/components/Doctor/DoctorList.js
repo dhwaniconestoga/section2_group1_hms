@@ -7,7 +7,7 @@ import ErrorDialogueBox from '../MUIDialogueBox/ErrorDialogueBox';
 import Box from '@mui/material/Box';
 
 
-function doctorList() {
+function DoctorList() {
     const params = new URLSearchParams(window.location.search);
     const name = params.get('name');
 
@@ -38,7 +38,7 @@ function doctorList() {
     };
 
     const deletedoctor = async (id) => {
-        var x = confirm("Are you sure you want to delete this doctor?");
+        var x = window.confirm("Are you sure you want to delete this doctor?");
         if (x)
             try {
                 await axios.delete(`http://localhost:3001/doctors/${id}`);
@@ -140,4 +140,4 @@ function doctorList() {
     )
 }
 
-export default doctorList;
+export default DoctorList;
