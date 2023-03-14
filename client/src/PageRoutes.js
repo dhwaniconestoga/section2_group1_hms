@@ -8,21 +8,34 @@ import SignupPage from './components/SignUp/SignupPage';
 
 // import AddUser from './components/User/AddUser';
 // import AddUser from './components/User/AddUser2';
-import AddUser from './components/User/AddUser3';
 
 
 // import UserList from "./components/User/UserList";
 // import UserList from "./components/User/UserList2";
-import UserList from "./components/User/UserList3";
 
 // import EditUser from "./components/User/EditUser";
 // import EditUser from "./components/User/EditUser2";
-import EditUser from "./components/User/EditUser3";
 
 
 import Dashboard from './components/dashboard/Dashboard';
 import AdminDashboard from './components/dashboard/AdminDashboard';
+
+import AddUser from './components/User/AddUser3';
+import UserList from "./components/User/UserList3";
+import EditUser from "./components/User/EditUser3";
 import User from './components/User/User';
+
+
+import AddPatient from './components/Patient/AddPatient';
+import PatientList from "./components/Patient/PatientList";
+import EditPatient from "./components/Patient/EditPatient";
+import Patient from './components/Patient/Patient';
+
+import AddDoctor from './components/Doctor/AddDoctor';
+import DoctorList from "./components/Doctor/DoctorList";
+import EditDoctor from "./components/Doctor/EditDoctor";
+import Doctor from './components/Doctor/Doctor';
+
 
 import {UserContext} from './Context/UserContext'
 import PatientDashboard from './components/dashboard/PatientDashboard';
@@ -56,6 +69,18 @@ export default function PageRoutes(){
                     <Route index element= {<UserList />} />
                     <Route path='add' element={<AddUser />} />
                     <Route path="edit/:id" element={<EditUser />} />
+                </Route>
+
+                <Route path='patients' element= { <ProtectedAdminRoute>  <Patient /> </ProtectedAdminRoute>} >
+                    <Route index element= {<PatientList />} />
+                    <Route path='add' element={<AddPatient />} />
+                    <Route path="edit/:id" element={<EditPatient />} />
+                </Route>
+
+                <Route path='doctors' element= { <ProtectedAdminRoute>  <Doctor /> </ProtectedAdminRoute>} >
+                    <Route index element= {<DoctorList />} />
+                    <Route path='add' element={<AddDoctor />} />
+                    <Route path="edit/:id" element={<EditDoctor />} />
                 </Route>
             </Route>
             <Route path='/login' element= {<LoginPage />} />

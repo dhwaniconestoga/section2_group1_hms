@@ -16,6 +16,8 @@ const UserRoute = require("./routes/UserRoute.js");
 const DashboardRoute = require("./routes/DashboardRoute.js");
 const verifyUser = require("./routes/api/verifyUser");
 const login = require("./routes/api/login");
+const PatientRoute = require("./routes/PatientRoute.js");
+const DoctorRoute = require("./routes/DoctorRoute.js");
 
 
 app.use(cors());
@@ -34,6 +36,9 @@ app.listen(process.env.PORT, () => {
 
 app.use(DashboardRoute);
 app.use(UserRoute);
+app.use(PatientRoute);
+app.use(DoctorRoute);
+
 
 // API that get all patients
 app.get('/patients', getAllPatients);

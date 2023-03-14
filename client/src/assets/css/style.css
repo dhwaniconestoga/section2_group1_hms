@@ -114,6 +114,9 @@ textarea.form-control {
 .list-group-item {
 	border: 1px solid #eaeaea;
 }
+.hide{
+	display: none;
+}
 
 /*-----------------
 	2. Table

@@ -5,7 +5,8 @@ import Header from '../Layout/Header';
 import Sidebar from '../Layout/Sidebar';
 import { NavLink } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';
-import ErrorDialogueBox from '../ErrorDialogueBox';
+import ErrorDialogueBox from '../MUIDialogueBox/ErrorDialogueBox';
+import Box from '@mui/material/Box';
 
 
 
@@ -91,13 +92,11 @@ function AddPatient() {
   }, [password, confirmPassword])
 
   return (
-    <div class="main-wrapper">
-      <Header />
-      <Sidebar />
-      <div class="page-wrapper">
+    <Box  component="main" sx={{ flexGrow: 1, p: 3 }}> 
+      <div className="page-wrapper">
         <div className="content">
           
-            <div class="card-box">
+            <div className="card-box">
               <div className="row">
                 <div className="col-lg-8 offset-lg-2">
                   <h4 className="page-title">Add Patient</h4>
@@ -181,7 +180,7 @@ function AddPatient() {
           ErrorList = {errorList}
         />
       </div>
-    </div>
+    </Box>
   )
 }
 

@@ -1,27 +1,30 @@
 import React, { useEffect, useState } from 'react';
+
+
 import Header from '../Layout/Header';
 import Sidebar from '../Layout/Sidebar';
 import { NavLink } from 'react-router-dom'
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import ErrorDialogueBox from '../MUIDialogueBox/ErrorDialogueBox';
-import axios from "axios";
 import Box from '@mui/material/Box';
 
-function EditPatient() {
+
+
+function Adddoctor() {
   const navigate = useNavigate();
 
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
-  const [address, setAddress] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [phone, setPhone] = useState('');
+  const [address, setAddress] = useState('');
   const [userType, setUserType] = useState('');
   const [passwordMatchDisplay, setPasswordMatchDisplay] = useState('none');
-  const [passwordValidationMessage, setPasswordValidationMessage] = useState('');
-  const { id } = useParams();
+  const [passwordValidationMessage, setPasswordValidationMessage] = useState('')
+
 
   const [errorDialogueBoxOpen, setErrorDialogueBoxOpen] = useState(false);
   const [errorList, setErrorList] = useState([]);
@@ -33,47 +36,45 @@ function EditPatient() {
     setErrorDialogueBoxOpen(false)
   };
 
-  useEffect(() => {
-    getPatientById();
-  }, []);
- 
-  const getPatientById = async () => {
-    const response = await axios.get(`http://localhost:3001/patients/${id}`);
-    console.log(response);
-    setFirstName(response.data.firstName);
-    setLastName(response.data.lastName);
-    setEmail(response.data.email);
-    setUsername(response.data.username);
-    setPhone(response.data.phone);
-    setAddress(response.data.address);
-    setPassword(response.data.password);
-    setConfirmPassword(response.data.password);
-    setUserType(response.data.userType);
-  };
 
-  const updatePatient = async (e) => {
-    e.preventDefault();
-    try {
-      await axios.patch(`http://localhost:3001/patients/${id}`, {
-        firstName,
-        lastName,
-        username,
-        email,
-        phone,
-        password,
-        confirmPassword,
-        address,
-        userType
-      });
-      navigate("/patients");
-    } catch (error) {
-      console.log(error.response.data.errors);
-      //Display error message
-      setErrorList(error.response.data.errors);
-      handleDialogueOpen();
+  const adddoctor = (event) => {
+    event.preventDefault();
+    // TODO: Handle doctor form submission'
+    const form = document.forms.adddoctorForm;
+    let doctor = {
+      firstName: form.firstName.value,
+      lastName: form.lastName.value,
+      username: form.username.value,
+      email: form.email.value,
+      phone: form.phone.value,
+      password: form.password.value,
+      confirmPassword: form.confirmPassword.value,
+      address: form.address.value,
+      userType: form.userType.value
     }
-  };
 
+
+    fetch('http://localhost:3001/doctors', {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(doctor)
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        let respMessage = data.message;
+        if (respMessage === "success") {
+          navigate("/doctors");
+        }
+        else {
+          //Display error message
+          setErrorList(data.errors);
+          handleDialogueOpen();
+        }
+      });
+  };
 
   useEffect(() => {
     if (password.length > 0 && password?.trim()?.length <= 6) {
@@ -91,20 +92,20 @@ function EditPatient() {
   }, [password, confirmPassword])
 
   return (
-    <Box component="main" sx={{ flexGrow: 1, p: 3 }}> 
+    <Box  component="main" sx={{ flexGrow: 1, p: 3 }}> 
       <div className="page-wrapper">
         <div className="content">
           
             <div className="card-box">
               <div className="row">
                 <div className="col-lg-8 offset-lg-2">
-                  <h3 className="page-title">Edit Patient</h3>
+                  <h4 className="page-title">Add Doctor</h4>
                 </div>
               </div>
               <div className="row">
 
                 <div className="col-lg-8 offset-lg-2">
-                <form id="addPatientForm" name='addPatientForm' onSubmit={updatePatient}>
+                <form id="adddoctorForm" name='adddoctorForm' onSubmit={adddoctor}>
                     <div className="row">
                       <div className="col-sm-6">
                         <div className="form-group">
@@ -154,19 +155,18 @@ function EditPatient() {
                           <input name="address" className="form-control" type="text" value={address} onChange={(event) => setAddress(event.target.value)} />
                         </div>
                       </div>
-                     
                       <div className="col-sm-6 hide">
                         <div className="form-group">
                           <label>Role</label>
-                          <select name="userType" className="form-select" defaultValue={userType} onChange={(event) => setUserType(event.target.value)}>
-                            <option value="Patient">Patient</option>
+                          <select name="userType" className="form-select" value={userType} onChange={(event) => setUserType(event.target.value)}>
+                            <option value="doctor">doctor</option>
                           </select>
                         </div>
                       </div>
                     </div>
 
                     <div className="m-t-20 text-center">
-                      <button type="submit" className="btn btn-primary submit-btn">Update Patient</button>
+                      <button id="adddoctor" type="submit" className="btn btn-primary submit-btn">Create Doctor</button>
                     </div>
                   </form>
                 </div>
@@ -176,7 +176,7 @@ function EditPatient() {
           <ErrorDialogueBox
           open={errorDialogueBoxOpen}
           handleToClose={handleDialogueClose}
-          ErrorTitle="Error: Edit Patient"
+          ErrorTitle="Error: Add doctor"
           ErrorList = {errorList}
         />
       </div>
@@ -184,4 +184,4 @@ function EditPatient() {
   )
 }
 
-export default EditPatient;
+export default Adddoctor;

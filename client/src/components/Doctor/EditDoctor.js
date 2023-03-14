@@ -7,7 +7,7 @@ import ErrorDialogueBox from '../MUIDialogueBox/ErrorDialogueBox';
 import axios from "axios";
 import Box from '@mui/material/Box';
 
-function EditPatient() {
+function Editdoctor() {
   const navigate = useNavigate();
 
   const [firstName, setFirstName] = useState('');
@@ -34,11 +34,11 @@ function EditPatient() {
   };
 
   useEffect(() => {
-    getPatientById();
+    getdoctorById();
   }, []);
  
-  const getPatientById = async () => {
-    const response = await axios.get(`http://localhost:3001/patients/${id}`);
+  const getdoctorById = async () => {
+    const response = await axios.get(`http://localhost:3001/doctors/${id}`);
     console.log(response);
     setFirstName(response.data.firstName);
     setLastName(response.data.lastName);
@@ -51,10 +51,10 @@ function EditPatient() {
     setUserType(response.data.userType);
   };
 
-  const updatePatient = async (e) => {
+  const updatedoctor = async (e) => {
     e.preventDefault();
     try {
-      await axios.patch(`http://localhost:3001/patients/${id}`, {
+      await axios.patch(`http://localhost:3001/doctors/${id}`, {
         firstName,
         lastName,
         username,
@@ -65,7 +65,7 @@ function EditPatient() {
         address,
         userType
       });
-      navigate("/patients");
+      navigate("/doctors");
     } catch (error) {
       console.log(error.response.data.errors);
       //Display error message
@@ -98,13 +98,13 @@ function EditPatient() {
             <div className="card-box">
               <div className="row">
                 <div className="col-lg-8 offset-lg-2">
-                  <h3 className="page-title">Edit Patient</h3>
+                  <h3 className="page-title">Edit Doctor</h3>
                 </div>
               </div>
               <div className="row">
 
                 <div className="col-lg-8 offset-lg-2">
-                <form id="addPatientForm" name='addPatientForm' onSubmit={updatePatient}>
+                <form id="adddoctorForm" name='adddoctorForm' onSubmit={updatedoctor}>
                     <div className="row">
                       <div className="col-sm-6">
                         <div className="form-group">
@@ -159,14 +159,14 @@ function EditPatient() {
                         <div className="form-group">
                           <label>Role</label>
                           <select name="userType" className="form-select" defaultValue={userType} onChange={(event) => setUserType(event.target.value)}>
-                            <option value="Patient">Patient</option>
+                            <option value="doctor">doctor</option>
                           </select>
                         </div>
                       </div>
                     </div>
 
                     <div className="m-t-20 text-center">
-                      <button type="submit" className="btn btn-primary submit-btn">Update Patient</button>
+                      <button type="submit" className="btn btn-primary submit-btn">Update Doctor</button>
                     </div>
                   </form>
                 </div>
@@ -176,7 +176,7 @@ function EditPatient() {
           <ErrorDialogueBox
           open={errorDialogueBoxOpen}
           handleToClose={handleDialogueClose}
-          ErrorTitle="Error: Edit Patient"
+          ErrorTitle="Error: Edit doctor"
           ErrorList = {errorList}
         />
       </div>
@@ -184,4 +184,4 @@ function EditPatient() {
   )
 }
 
-export default EditPatient;
+export default Editdoctor;
