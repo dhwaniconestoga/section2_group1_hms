@@ -94,6 +94,7 @@ function PatientList() {
                                             <th>Name</th>
                                             <th>Phone</th>
                                             <th>Email</th>
+                                            <th>Gender</th>
                                             <th>Address</th>
                                             <th className="text-right">Action</th>
                                         </tr>
@@ -105,6 +106,7 @@ function PatientList() {
                                                 <td>{patient.firstName} {patient.lastName}</td>
                                                 <td>{patient.phone}</td>
                                                 <td>{patient.email}</td>
+                                                <td>{patient.gender}</td>
                                                 <td>{patient.address}</td>
                                                 <td>
                                                     <Link

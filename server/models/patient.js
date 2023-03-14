@@ -30,6 +30,12 @@ const PatientSchema = new Schema({
   },
   address: {
     type: String
+  },
+  gender: {
+    type: String
+  },
+  dob: {
+    type: String
   }
 });
 

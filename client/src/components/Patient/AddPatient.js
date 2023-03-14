@@ -22,6 +22,7 @@ function AddPatient() {
   const [phone, setPhone] = useState('');
   const [address, setAddress] = useState('');
   const [userType, setUserType] = useState('');
+  const [gender, setGender] = useState('');
   const [passwordMatchDisplay, setPasswordMatchDisplay] = useState('none');
   const [passwordValidationMessage, setPasswordValidationMessage] = useState('')
 
@@ -50,6 +51,7 @@ function AddPatient() {
       password: form.password.value,
       confirmPassword: form.confirmPassword.value,
       address: form.address.value,
+      gender: form.gender.value,
       userType: form.userType.value
     }
 
@@ -153,6 +155,15 @@ function AddPatient() {
                         <div className="form-group">
                           <label>Address </label>
                           <input name="address" className="form-control" type="text" value={address} onChange={(event) => setAddress(event.target.value)} />
+                        </div>
+                      </div>
+                      <div className="col-sm-6">
+                        <div className="form-group">
+                          <label>Gender</label>
+                          <select name="gender" className="form-select" value={gender} onChange={(event) => setGender(event.target.value)}>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                          </select>
                         </div>
                       </div>
                       <div className="col-sm-6 hide">

@@ -18,6 +18,7 @@ function EditPatient() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [phone, setPhone] = useState('');
+  const [gender, setGender] = useState('');
   const [userType, setUserType] = useState('');
   const [passwordMatchDisplay, setPasswordMatchDisplay] = useState('none');
   const [passwordValidationMessage, setPasswordValidationMessage] = useState('');
@@ -49,6 +50,7 @@ function EditPatient() {
     setPassword(response.data.password);
     setConfirmPassword(response.data.password);
     setUserType(response.data.userType);
+    setGender(response.data.gender);
   };
 
   const updatePatient = async (e) => {
@@ -63,6 +65,7 @@ function EditPatient() {
         password,
         confirmPassword,
         address,
+        gender,
         userType
       });
       navigate("/patients");
@@ -154,11 +157,19 @@ function EditPatient() {
                           <input name="address" className="form-control" type="text" value={address} onChange={(event) => setAddress(event.target.value)} />
                         </div>
                       </div>
-                     
+                      <div className="col-sm-6">
+                        <div className="form-group">
+                          <label>Gender</label>
+                          <select name="gender" className="form-select" value={gender} onChange={(event) => setGender(event.target.value)}>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                          </select>
+                        </div>
+                      </div>
                       <div className="col-sm-6 hide">
                         <div className="form-group">
                           <label>Role</label>
-                          <select name="userType" className="form-select" defaultValue={userType} onChange={(event) => setUserType(event.target.value)}>
+                          <select name="userType" className="form-select" value={userType} onChange={(event) => setUserType(event.target.value)}>
                             <option value="Patient">Patient</option>
                           </select>
                         </div>

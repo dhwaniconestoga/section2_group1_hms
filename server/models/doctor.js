@@ -30,6 +30,9 @@ const DoctorSchema = new Schema({
   },
   specialist: {
     type: String
+  },
+  address: {
+    type: String
   }
 });
 
