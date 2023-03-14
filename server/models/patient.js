@@ -10,17 +10,14 @@ const PatientSchema = new Schema({
   },
   email: {
     type: String , 
-    required : [true,'Please provide email'],
     unique:true
   },
   username: {
       type: String , 
-      required : [true,'Please provide username'],
       unique:true
   },
   password: {
-      type: String , 
-      required : [true,'Please provide password'],
+      type: String
   },
   firstName: {
     type: String

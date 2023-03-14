@@ -1,4 +1,5 @@
 const Patient = require("../models/patient.js");
+const User = require("../models/user.js");
 
 const getPatients = async (req, res) => {
     
@@ -51,11 +52,6 @@ const isPatientValid = (newPatient) => {
         errorList[errorList.length] = "Password and Confirm Password did not match";
     }
     
-    if (!newPatient.address) {
-        errorList[errorList.length] = "Please enter address";
-    }
-    
-
     if (errorList.length > 0) {
         result = {
             status: false,
@@ -80,12 +76,34 @@ const savePatient = async (req, res) => {
     }
     else {
         const patient = new Patient(req.body);
-        try {
-            const insertedPatient = await patient.save();
-            res.status(201).json({ message: 'success' });
-        } catch (error) {
-            res.status(400).json({ message: 'error', errors: [error.message] });
-        }
+        User.create(
+            {
+                email: patient.email,
+                username: patient.username,
+                firstName: patient.firstName,
+                lastName: patient.lastName,
+                password: patient.password,
+                userType: 'Patient',
+                activated: 1,
+            },
+            (error, userDetails) => {
+                if (error) {
+                    res.status(400).json({ message: "error", errors: [error.message] });
+                } else {
+                    patient.userId = userDetails._id,
+                    Patient.create(patient,
+                        (error2, patientDetails) => {
+                            if (error2) {
+                                User.deleteOne({ _id: userDetails });
+                                res.status(400).json({ message: 'error', errors: [error2.message] });
+                            } else {
+                                res.status(201).json({ message: 'success' });
+                            }
+                        }
+                    );
+                }
+            }
+        );
     }
 }
 

@@ -81,7 +81,6 @@ const saveDoctor = async (req, res) => {
     }
     else {
         const doctor = new Doctor(req.body);
-        console.log(doctor.email);
         User.create(
             {
                 email: doctor.email,
