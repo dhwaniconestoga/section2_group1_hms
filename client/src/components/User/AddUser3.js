@@ -9,8 +9,6 @@ import ErrorDialogueBox from '../MUIDialogueBox/ErrorDialogueBox';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
 
-
-
 function AddUser() {
   
 
