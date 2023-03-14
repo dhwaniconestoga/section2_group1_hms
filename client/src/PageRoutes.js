@@ -40,6 +40,8 @@ import Doctor from './components/Doctor/Doctor';
 import {UserContext} from './Context/UserContext'
 import PatientDashboard from './components/dashboard/PatientDashboard';
 import DoctorDashboard from './components/dashboard/DoctorDashboard';
+import AdminAppointment from './components/Appointment/AdminAppointment';
+
 
 
 const NotFound = () => <h2 style={{margin:'70px'}}>This Path is not available</h2>
@@ -82,6 +84,16 @@ export default function PageRoutes(){
                     <Route path='add' element={<AddDoctor />} />
                     <Route path="edit/:id" element={<EditDoctor />} />
                 </Route>
+
+                <Route path='appointments' element= {
+                    currentUser.userType == "Admin"?
+                        <AdminAppointment />:
+                    currentUser.userType == "Doctor"?
+                        <DoctorDashboard />:
+                    currentUser.userType == "Patient"? 
+                        <PatientDashboard />:
+                    <AdminDashboard />} 
+                />
             </Route>
             <Route path='/login' element= {<LoginPage />} />
             <Route path='/signup' element= {<SignupPage />} />

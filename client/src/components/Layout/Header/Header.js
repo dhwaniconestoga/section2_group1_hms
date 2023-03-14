@@ -72,7 +72,7 @@ const Header = ({open,handleDrawerOpen,headerTitle}) => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h4" noWrap component="div" onClick={redirectToHome} sx={{ flexGrow: 1 }} >
+          <Typography variant="h4" noWrap component="div" onClick={redirectToHome} sx={{ flexGrow: 1, fontWeight:'bolder' }} >
             {/* {headerTitle} */}
             Green Hills Hospital 
           </Typography>

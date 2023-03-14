@@ -18,6 +18,7 @@ const verifyUser = require("./routes/api/verifyUser");
 const login = require("./routes/api/login");
 const PatientRoute = require("./routes/PatientRoute.js");
 const DoctorRoute = require("./routes/DoctorRoute.js");
+const AppointmentRoute = require("./routes/AppointmentRoute.js");
 
 
 app.use(cors());
@@ -38,6 +39,7 @@ app.use(DashboardRoute);
 app.use(UserRoute);
 app.use(PatientRoute);
 app.use(DoctorRoute);
+app.use(AppointmentRoute);
 
 
 // API that get all patients

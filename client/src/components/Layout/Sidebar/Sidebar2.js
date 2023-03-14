@@ -201,10 +201,20 @@ export default function Sidebar({ open, handleDrawerClose, handleDrawerOpen }) {
                 </Collapse> */}
                 <ListItem key={"Appointments"} disablePadding sx={{ display: 'block' }}>
                     <ListItemButton
+                        component = {NavLink}
+                        to="/appointments" 
+                        style={{ textDecoration: 'none', color: 'white' }}
+                        selected={selectedItem == "appointments" ? true : false}
                         sx={{
                             minHeight: 48,
                             justifyContent: open ? 'initial' : 'center',
                             px: 2.5,
+                            "&.Mui-selected": {
+                                backgroundColor: "#1b4f32",
+                            },
+                            "&.Mui-selected:hover": {
+                                backgroundColor: "#1b4f32",
+                            },
                         }}
                     >
                         <ListItemIcon
