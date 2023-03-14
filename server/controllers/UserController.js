@@ -1,4 +1,7 @@
 const User = require("../models/user.js");
+const Patient = require("../models/patient.js");
+const Doctor = require("../models/doctor.js");
+
 
 const getUsers = async (req, res) => {
     
@@ -75,13 +78,63 @@ const saveUser = async (req, res) => {
         });
     }
     else {
-        const user = new User(req.body);
-        try {
-            const inserteduser = await user.save();
-            res.status(201).json({ message: 'success' });
-        } catch (error) {
-            res.status(400).json({ message: 'error', errors: [error.message] });
-        }
+        const newUser = new User(req.body);
+
+        User.create(
+            {
+                email: newUser.email,
+                username: newUser.username,
+                firstName: newUser.firstName,
+                lastName: newUser.lastName,
+                password: newUser.password,
+                userType: newUser.userType,
+                activated: true
+            },
+            (error, userDetails) => {
+                if (error) {
+                    res.status(400).json({ message: "error", errors: [error.message] });
+                } else {
+                    
+                    if (newUser.userType === "Doctor") {
+                        Doctor.create(
+                            {
+                                userId: userDetails._id,
+                                firstName: newUser.firstName,
+                                lastName: newUser.lastName,
+                                email: newUser.email
+                            },
+                            (error2, doctorDetails) => {
+                                if (error2) {
+                                    User.deleteOne({ _id: userDetails });
+                                    res.status(400).json({ message: "error", errors: [error2.message] });
+                                } else {
+                                    res.status(201).json({ message: "success" });
+                                }
+                            }
+                        );
+                    }
+                    if (newUser.userType === "Patient") {
+                        Patient.create(
+                            {
+                                userId: userDetails._id,
+                                firstName: newUser.firstName,
+                                lastName: newUser.lastName,
+                                email: newUser.email
+                            },
+                            (error2, patientDetails) => {
+                                if (error2) {
+                                    User.deleteOne({ _id: userDetails });
+                                    res.status(400).json({ message: "error", errors: [error2.message] });
+                                } else {
+                                    res.status(201).json({ message: "success" });
+                                }
+                            }
+                        );
+                    }
+                }
+            }
+        );
+
     }
 }
 

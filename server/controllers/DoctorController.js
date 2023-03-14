@@ -89,7 +89,7 @@ const saveDoctor = async (req, res) => {
                 lastName: doctor.lastName,
                 password: doctor.password,
                 userType: 'Doctor',
-                activated: 1,
+                activated: true,
             },
             (error, userDetails) => {
                 if (error) {
