@@ -18,11 +18,11 @@ export default function DoctorDashboard() {
                             <span className={styles.dashWidgetBg1}><i className="fa fa-stethoscope" aria-hidden="true"></i></span>
                             <div className={[" ", styles.dashWidgetInfo].join(" ")} >
                                 <h3 className={styles.dashWidgetInfoH3}>78</h3>
-                                <span className={styles.widgetTitle1}>Doctor <i class="fa fa-check" aria-hidden="true"></i></span>
+                                <span className={styles.widgetTitle1}>Doctor Dashboard <i class="fa fa-check" aria-hidden="true"></i></span>
                             </div>
                         </div>
                     </div>
-                    <div className={["", styles.statCard].join(" ")}>
+                    {/* <div className={["", styles.statCard].join(" ")}>
                         <div className={styles.dashWidget}>
                             <span className={styles.dashWidgetBg2}><i className="fa fa-user-o" aria-hidden="true"></i></span>
                             <div className={[" ", styles.dashWidgetInfo].join(" ")} >
@@ -48,7 +48,7 @@ export default function DoctorDashboard() {
                                 <span className={styles.widgetTitle4}>Pending Appointments <i class="fa fa-check" aria-hidden="true"></i></span>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
 
                 <div className="row ">

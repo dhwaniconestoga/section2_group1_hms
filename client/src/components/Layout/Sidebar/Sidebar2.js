@@ -15,6 +15,7 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';
 import CalendarTodayOutlinedIcon from '@mui/icons-material/CalendarTodayOutlined';
+import AccessibleForwardIcon from '@mui/icons-material/AccessibleForward';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import Person2OutlinedIcon from '@mui/icons-material/Person2Outlined';
 import Collapse from '@mui/material/Collapse';
@@ -23,6 +24,10 @@ import TableChartIcon from '@mui/icons-material/TableChart';
 import { NavLink,Link,useLocation } from 'react-router-dom'
 import React, { useContext } from 'react';
 import {UserContext} from '../../../Context/UserContext'
+import SickIcon from '@mui/icons-material/Sick';
+import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
+
+
 
 import styles from './Sidebar.module.css'
 
@@ -150,6 +155,38 @@ export default function Sidebar({ open, handleDrawerClose, handleDrawerOpen }) {
                         </ListItemButton>
                     {/* </NavLink> */}
                 </ListItem>
+                
+                <ListItem key={"Appointments"} disablePadding sx={{ display: 'block' }}>
+                    <ListItemButton
+                        component = {NavLink}
+                        to="/appointments" 
+                        style={{ textDecoration: 'none', color: 'white' }}
+                        selected={selectedItem == "appointments" ? true : false}
+                        sx={{
+                            minHeight: 48,
+                            justifyContent: open ? 'initial' : 'center',
+                            px: 2.5,
+                            "&.Mui-selected": {
+                                backgroundColor: "#1b4f32",
+                            },
+                            "&.Mui-selected:hover": {
+                                backgroundColor: "#1b4f32",
+                            },
+                        }}
+                    >
+                        <ListItemIcon
+                            sx={{
+                                minWidth: 0,
+                                mr: open ? 3 : 'auto',
+                                justifyContent: 'center',
+                            }}
+                        >
+                            <CalendarTodayOutlinedIcon style={{ color: '#fff' }} />
+                        </ListItemIcon>
+                        <ListItemText primary={"Appointments"} sx={{ opacity: open ? 1 : 0 }} />
+                    </ListItemButton>
+                </ListItem>
+                <Divider />
                 <ListItem key={"Users"} disablePadding sx={{ display: 'block' }}>
                     {/* <NavLink to="/users" style={{ textDecoration: 'none', color: 'white' }} > */}
                         <ListItemButton
@@ -199,12 +236,12 @@ export default function Sidebar({ open, handleDrawerClose, handleDrawerOpen }) {
                         </ListItemButton>
                     </List>
                 </Collapse> */}
-                <ListItem key={"Appointments"} disablePadding sx={{ display: 'block' }}>
+                <ListItem key={"Patients"} disablePadding sx={{ display: 'block' }}>
                     <ListItemButton
                         component = {NavLink}
-                        to="/appointments" 
+                        to="/patients" 
                         style={{ textDecoration: 'none', color: 'white' }}
-                        selected={selectedItem == "appointments" ? true : false}
+                        selected={selectedItem == "patients" ? true : false}
                         sx={{
                             minHeight: 48,
                             justifyContent: open ? 'initial' : 'center',
@@ -224,12 +261,42 @@ export default function Sidebar({ open, handleDrawerClose, handleDrawerOpen }) {
                                 justifyContent: 'center',
                             }}
                         >
-                            <CalendarTodayOutlinedIcon style={{ color: '#fff' }} />
+                            <AccessibleForwardIcon style={{ color: '#fff' }} />
                         </ListItemIcon>
-                        <ListItemText primary={"Appointments"} sx={{ opacity: open ? 1 : 0 }} />
+                        <ListItemText primary={"Patients"} sx={{ opacity: open ? 1 : 0 }} />
                     </ListItemButton>
                 </ListItem>
-                {['Patients', 'Starred'].map((text, index) => (
+                <ListItem key={"Doctors"} disablePadding sx={{ display: 'block' }}>
+                    <ListItemButton
+                        component = {NavLink}
+                        to="/doctors" 
+                        style={{ textDecoration: 'none', color: 'white' }}
+                        selected={selectedItem == "doctors" ? true : false}
+                        sx={{
+                            minHeight: 48,
+                            justifyContent: open ? 'initial' : 'center',
+                            px: 2.5,
+                            "&.Mui-selected": {
+                                backgroundColor: "#1b4f32",
+                            },
+                            "&.Mui-selected:hover": {
+                                backgroundColor: "#1b4f32",
+                            },
+                        }}
+                    >
+                        <ListItemIcon
+                            sx={{
+                                minWidth: 0,
+                                mr: open ? 3 : 'auto',
+                                justifyContent: 'center',
+                            }}
+                        >
+                            <LocalHospitalIcon style={{ color: '#fff' }} />
+                        </ListItemIcon>
+                        <ListItemText primary={"Doctors"} sx={{ opacity: open ? 1 : 0 }} />
+                    </ListItemButton>
+                </ListItem>
+                {/* {['Patients', 'Starred'].map((text, index) => (
                     <ListItem key={text} disablePadding sx={{ display: 'block' }}>
                         <ListItemButton
                             sx={{
@@ -250,10 +317,10 @@ export default function Sidebar({ open, handleDrawerClose, handleDrawerOpen }) {
                             <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
                         </ListItemButton>
                     </ListItem>
-                ))}
+                ))} */}
             </List>
             <Divider />
-            <List>
+            {/* <List>
                 {['Doctors', 'Nurses', 'Medicines'].map((text, index) => (
                     <ListItem key={text} disablePadding sx={{ display: 'block' }}>
                         <ListItemButton
@@ -276,7 +343,7 @@ export default function Sidebar({ open, handleDrawerClose, handleDrawerOpen }) {
                         </ListItemButton>
                     </ListItem>
                 ))}
-            </List>
+            </List> */}
             <Divider />
             <List>
                 <ListItem key={"Logout"} disablePadding sx={{ display: 'block' }} onClick={signOutUser}>
