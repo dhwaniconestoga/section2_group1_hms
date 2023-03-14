@@ -115,19 +115,22 @@ module.exports = (req, res) => {
                 } else {
                     let verificationToken = generateVerificationToken()
                     saveVerificationToken(userDetails._id,verificationToken);
-                    let resp = sendVerificationEmail(userDetails.email,verificationToken.token);
+                    
                     if (newUser.userType === "Doctor") {
                         Doctor.create(
                             {
                                 userId: userDetails._id,
                                 firstName: newUser.firstName,
                                 lastName: newUser.lastName,
+                                email: newUser.email,
+                                username: newUser.email
                             },
                             (error2, doctorDetails) => {
                                 if (error2) {
                                     User.deleteOne({ _id: userDetails });
                                     res.json({ message: "error", errors: [error2.message] });
                                 } else {
+                                    let resp = sendVerificationEmail(userDetails.email,verificationToken.token);
                                     res.json({ message: "success" });
                                 }
                             }
@@ -139,12 +142,15 @@ module.exports = (req, res) => {
                                 userId: userDetails._id,
                                 firstName: newUser.firstName,
                                 lastName: newUser.lastName,
+                                email: newUser.email,
+                                username: newUser.email
                             },
                             (error2, patientDetails) => {
                                 if (error2) {
                                     User.deleteOne({ _id: userDetails });
                                     res.json({ message: "error", errors: [error2.message] });
                                 } else {
+                                    let resp = sendVerificationEmail(userDetails.email,verificationToken.token);
                                     res.json({ message: "success" });
                                 }
                             }
