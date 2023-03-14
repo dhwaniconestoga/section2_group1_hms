@@ -94,7 +94,7 @@ function DoctorList() {
                                             <th>Name</th>
                                             <th>Phone</th>
                                             <th>Email</th>
-                                            <th>Specialist</th>
+                                            <th>Department</th>
                                             <th className="text-right">Action</th>
                                         </tr>
                                     </thead>

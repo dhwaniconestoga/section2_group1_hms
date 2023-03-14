@@ -150,7 +150,7 @@ function Editdoctor() {
                       </div>
                       <div className="col-sm-6">
                         <div className="form-group">
-                          <label>Specialist </label>
+                          <label>Department </label>
                           <input name="specialist" className="form-control" type="text" value={specialist} onChange={(event) => setSpecialist(event.target.value)} />
                         </div>
                       </div>
