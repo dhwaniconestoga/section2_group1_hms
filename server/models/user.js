@@ -37,9 +37,6 @@ const UserSchema  = new Schema({
         type: String , 
         required : [true,'Please provide last name'],
     },
-    phone: {
-        type: String 
-    },
     userType: {
         type: String , 
         required : true,

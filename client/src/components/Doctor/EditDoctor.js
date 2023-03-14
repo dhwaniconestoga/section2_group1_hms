@@ -14,7 +14,7 @@ function Editdoctor() {
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
-  const [address, setAddress] = useState('');
+  const [specialist, setSpecialist] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [phone, setPhone] = useState('');
@@ -45,7 +45,7 @@ function Editdoctor() {
     setEmail(response.data.email);
     setUsername(response.data.username);
     setPhone(response.data.phone);
-    setAddress(response.data.address);
+    setSpecialist(response.data.specialist);
     setPassword(response.data.password);
     setConfirmPassword(response.data.password);
     setUserType(response.data.userType);
@@ -62,12 +62,12 @@ function Editdoctor() {
         phone,
         password,
         confirmPassword,
-        address,
+        specialist,
         userType
       });
       navigate("/doctors");
     } catch (error) {
-      console.log(error.response.data.errors);
+      //console.log(error.response.data.errors);
       //Display error message
       setErrorList(error.response.data.errors);
       handleDialogueOpen();
@@ -76,7 +76,7 @@ function Editdoctor() {
 
 
   useEffect(() => {
-    if (password.length > 0 && password?.trim()?.length <= 6) {
+    if ((typeof password !== 'undefined') && password.length > 0 && password?.trim()?.length <= 6) {
       setPasswordValidationMessage('Password Length must be greater than 6 characters');
     }
     else {
@@ -150,8 +150,8 @@ function Editdoctor() {
                       </div>
                       <div className="col-sm-6">
                         <div className="form-group">
-                          <label>Address </label>
-                          <input name="address" className="form-control" type="text" value={address} onChange={(event) => setAddress(event.target.value)} />
+                          <label>Specialist </label>
+                          <input name="specialist" className="form-control" type="text" value={specialist} onChange={(event) => setSpecialist(event.target.value)} />
                         </div>
                       </div>
                      

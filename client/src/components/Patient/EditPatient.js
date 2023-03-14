@@ -76,7 +76,7 @@ function EditPatient() {
 
 
   useEffect(() => {
-    if (password.length > 0 && password?.trim()?.length <= 6) {
+    if ((typeof password !== 'undefined') && password.length > 0 && password?.trim()?.length <= 6) {
       setPasswordValidationMessage('Password Length must be greater than 6 characters');
     }
     else {

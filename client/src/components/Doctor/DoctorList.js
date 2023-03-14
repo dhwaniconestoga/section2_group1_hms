@@ -74,7 +74,7 @@ function doctorList() {
 
                         <div className="col-sm-4 col-md-4">
                             <div className="form-group form-focus">
-                                <label className="focus-label">doctor Name</label>
+                                <label className="focus-label">Doctor Name</label>
                                 <input type="text" name="name" className="form-control floating" />
                             </div>
                         </div>
@@ -94,7 +94,7 @@ function doctorList() {
                                             <th>Name</th>
                                             <th>Phone</th>
                                             <th>Email</th>
-                                            <th>Address</th>
+                                            <th>Specialist</th>
                                             <th className="text-right">Action</th>
                                         </tr>
                                     </thead>
@@ -105,7 +105,7 @@ function doctorList() {
                                                 <td>{doctor.firstName} {doctor.lastName}</td>
                                                 <td>{doctor.phone}</td>
                                                 <td>{doctor.email}</td>
-                                                <td>{doctor.address}</td>
+                                                <td>{doctor.specialist}</td>
                                                 <td>
                                                     <Link
                                                         to={`/doctors/edit/${doctor._id}`}

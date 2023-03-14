@@ -20,7 +20,7 @@ function Adddoctor() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [phone, setPhone] = useState('');
-  const [address, setAddress] = useState('');
+  const [specialist, setSpecialist] = useState('');
   const [userType, setUserType] = useState('');
   const [passwordMatchDisplay, setPasswordMatchDisplay] = useState('none');
   const [passwordValidationMessage, setPasswordValidationMessage] = useState('')
@@ -49,7 +49,7 @@ function Adddoctor() {
       phone: form.phone.value,
       password: form.password.value,
       confirmPassword: form.confirmPassword.value,
-      address: form.address.value,
+      specialist: form.specialist.value,
       userType: form.userType.value
     }
 
@@ -151,8 +151,8 @@ function Adddoctor() {
                       </div>
                       <div className="col-sm-6">
                         <div className="form-group">
-                          <label>Address </label>
-                          <input name="address" className="form-control" type="text" value={address} onChange={(event) => setAddress(event.target.value)} />
+                          <label>Specialist </label>
+                          <input name="specialist" className="form-control" type="text" value={specialist} onChange={(event) => setSpecialist(event.target.value)} />
                         </div>
                       </div>
                       <div className="col-sm-6 hide">

@@ -1,19 +1,20 @@
 const Doctor = require("../models/doctor.js");
+const User = require("../models/user.js");
 
 const getDoctors = async (req, res) => {
-    
+
     try {
-    
+
         var name = req.query.name;
-        
+
         let doctors = [];
-        if(!name){
+        if (!name) {
             doctors = await Doctor.find({});
-        }else{
-           
-            doctors = await Doctor.find({$or:[{"firstName":name},{"lastName":name}]});
+        } else {
+
+            doctors = await Doctor.find({ $or: [{ "firstName": name }, { "lastName": name }] });
         }
-        
+
         res.json(doctors);
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -22,7 +23,7 @@ const getDoctors = async (req, res) => {
 
 const getDoctorById = async (req, res) => {
     try {
-        const doctor = await doctor.findById(req.params.id);
+        const doctor = await Doctor.findById(req.params.id);
         res.json(doctor);
     } catch (error) {
         res.status(404).json({ message: error.message });
@@ -50,11 +51,11 @@ const isDoctorValid = (newdoctor) => {
     if (!(newdoctor.password == newdoctor.confirmPassword)) {
         errorList[errorList.length] = "Password and Confirm Password did not match";
     }
-    
-    if (!newdoctor.address) {
-        errorList[errorList.length] = "Please enter address";
+
+    if (!newdoctor.specialist) {
+        errorList[errorList.length] = "Please enter specialist";
     }
-    
+
 
     if (errorList.length > 0) {
         result = {
@@ -79,13 +80,39 @@ const saveDoctor = async (req, res) => {
         });
     }
     else {
-        const doctor = new doctor(req.body);
-        try {
-            const inserteddoctor = await Doctor.save();
-            res.status(201).json({ message: 'success' });
-        } catch (error) {
-            res.status(400).json({ message: 'error', errors: [error.message] });
-        }
+        const doctor = new Doctor(req.body);
+        console.log(doctor.email);
+        User.create(
+            {
+                email: doctor.email,
+                username: doctor.username,
+                firstName: doctor.firstName,
+                lastName: doctor.lastName,
+                password: doctor.password,
+                userType: 'Doctor',
+                activated: 1,
+            },
+            (error, userDetails) => {
+                if (error) {
+                    res.status(400).json({ message: "error", errors: [error.message] });
+                } else {
+                    doctor.userId = userDetails._id,
+                    Doctor.create(doctor,
+                        (error2, doctorDetails) => {
+                            if (error2) {
+                                User.deleteOne({ _id: userDetails });
+                                res.status(400).json({ message: 'error', errors: [error2.message] });
+                            } else {
+                                res.status(201).json({ message: 'success' });
+                            }
+                        }
+                    );
+
+
+                }
+            }
+        );
+        
     }
 }
 
