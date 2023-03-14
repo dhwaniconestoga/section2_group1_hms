@@ -89,14 +89,13 @@ function UserList() {
                             <div className="form-floating ">
                                 
                                 <input type="text" id="empNameSearch" className="form-control"  placeholder='Emloyee Name' />
-                                <label htmlFor='empNameSearch'>Employee Name</label>
+                                <label htmlFor='empNameSearch'>User Name</label>
                             </div>
                         </div>
                         <div className="col-sm-4 col-md-4">
                             <div className="form-floating">
                                 <select  name="role" className="form-select floating">
                                     <option>All</option>
-                                    <option value="Nurse">Nurse</option>
                                     <option value="Doctor">Doctor</option>
                                     <option value="Admin">Admin</option>
                                     <option value="Patient">Patient</option>

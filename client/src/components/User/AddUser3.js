@@ -155,7 +155,6 @@ function AddUser() {
                             <select name="userType" className="form-select" value={userType} onChange={(event) => setUserType(event.target.value)}>
                               <option value="Admin">Admin</option>
                               <option value="Doctor">Doctor</option>
-                              <option value="Nurse">Nurse</option>
                               <option value="Patient">Patient</option>
                             </select>
                           </div>
